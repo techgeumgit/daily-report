@@ -57,6 +57,9 @@ export default function UserManagement() {
   };
 
   const handleToggleActive = async (user: UserData) => {
+    const action = user.isActive ? 'deactivate' : 'activate';
+    if (!confirm(`Are you sure you want to ${action} "${user.name}"?`)) return;
+    
     setToggling(user._id);
     try {
       const res = await fetch(`/api/admin/users/${user._id}`, {
