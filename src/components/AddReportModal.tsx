@@ -120,8 +120,8 @@ export default function AddReportModal({ onCreated }: Props) {
                   value={form.todaysWork}
                   onChange={handleChange}
                   required
-                  rows={2}
-                  className="w-full px-3 py-2 rounded-lg border border-[#e5e7eb] text-sm text-[#111827] resize-none focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
+                  rows={4}
+                  className="w-full px-3 py-2 rounded-lg border border-[#e5e7eb] text-sm text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
                 />
               </div>
 
@@ -154,8 +154,8 @@ export default function AddReportModal({ onCreated }: Props) {
                   value={form.tomorrowPlan}
                   onChange={handleChange}
                   required
-                  rows={2}
-                  className="w-full px-3 py-2 rounded-lg border border-[#e5e7eb] text-sm text-[#111827] resize-none focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
+                  rows={4}
+                  className="w-full px-3 py-2 rounded-lg border border-[#e5e7eb] text-sm text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
                 />
               </div>
 

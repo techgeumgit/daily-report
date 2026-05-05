@@ -124,23 +124,23 @@ export default function ReportsTable() {
                   <td className="px-4 py-3 whitespace-nowrap font-medium text-[#111827]">
                     {report.name}
                   </td>
-                  <td className="px-4 py-3 text-[#6b7280] max-w-[220px]">
-                    <p className="truncate" title={report.todaysWork}>
+                  <td className="px-4 py-3 text-[#6b7280] min-w-[200px]">
+                    <p className="whitespace-pre-wrap text-xs leading-relaxed" title={report.todaysWork}>
                       {report.todaysWork}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-[#6b7280] max-w-[160px]">
-                    <p className="truncate" title={report.meetingAttended}>
+                  <td className="px-4 py-3 text-[#6b7280] min-w-[160px]">
+                    <p className="whitespace-pre-wrap text-xs leading-relaxed" title={report.meetingAttended}>
                       {report.meetingAttended || <span className="text-[#d1d5db]">—</span>}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-[#6b7280] max-w-[160px]">
-                    <p className="truncate" title={report.bottleneck}>
+                  <td className="px-4 py-3 text-[#6b7280] min-w-[160px]">
+                    <p className="whitespace-pre-wrap text-xs leading-relaxed" title={report.bottleneck}>
                       {report.bottleneck || <span className="text-[#d1d5db]">—</span>}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-[#6b7280] max-w-[220px]">
-                    <p className="truncate" title={report.tomorrowPlan}>
+                  <td className="px-4 py-3 text-[#6b7280] min-w-[200px]">
+                    <p className="whitespace-pre-wrap text-xs leading-relaxed" title={report.tomorrowPlan}>
                       {report.tomorrowPlan}
                     </p>
                   </td>
