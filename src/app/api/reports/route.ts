@@ -83,6 +83,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Check for existing report on the same date
+    const startOfDay = new Date(submittedDate);
+    startOfDay.setUTCHours(0, 0, 0, 0);
+    const endOfDay = new Date(submittedDate);
+    endOfDay.setUTCHours(23, 59, 59, 999);
+
+    const existingReport = await Report.findOne({
+      name: name.trim(),
+      date: { $gte: startOfDay, $lte: endOfDay }
+    });
+
+    if (existingReport) {
+      return NextResponse.json(
+        { success: false, error: 'You have already submitted a report for this date.' },
+        { status: 409 }
+      );
+    }
+
     const report = await Report.create({
       date: submittedDate,
       name: name.trim(),

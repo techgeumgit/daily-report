@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongoose';
 import Report from '@/models/Report';
+import { isAdmin } from '@/lib/auth';
 
 // PUT /api/reports/[id] - admin edit (no 48h restriction)
 export async function PUT(
@@ -10,17 +11,16 @@ export async function PUT(
   try {
     await connectDB();
 
-    const { id } = await params;
-    const body = await req.json();
-    const { date, name, todaysWork, meetingAttended, bottleneck, tomorrowPlan, adminSecret } = body;
-
-    // Verify admin secret
-    if (adminSecret !== process.env.ADMIN_SECRET) {
+    if (!(await isAdmin())) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
+
+    const { id } = await params;
+    const body = await req.json();
+    const { date, name, todaysWork, meetingAttended, bottleneck, tomorrowPlan } = body;
 
     if (!name || !todaysWork || !tomorrowPlan) {
       return NextResponse.json(
@@ -67,16 +67,14 @@ export async function DELETE(
   try {
     await connectDB();
 
-    const { id } = await params;
-    const body = await req.json();
-    const { adminSecret } = body;
-
-    if (adminSecret !== process.env.ADMIN_SECRET) {
+    if (!(await isAdmin())) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
+
+    const { id } = await params;
 
     const deleted = await Report.findByIdAndDelete(id);
 

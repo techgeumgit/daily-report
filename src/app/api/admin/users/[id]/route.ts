@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongoose';
 import User from '@/models/User';
+import { isAdmin } from '@/lib/auth';
 
 // PUT /api/admin/users/[id] - toggle active status or rename
 export async function PUT(
@@ -10,13 +11,13 @@ export async function PUT(
   try {
     await connectDB();
 
-    const { id } = await params;
-    const body = await req.json();
-    const { isActive, name, adminSecret } = body;
-
-    if (adminSecret !== process.env.ADMIN_SECRET) {
+    if (!(await isAdmin())) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
+
+    const { id } = await params;
+    const body = await req.json();
+    const { isActive, name } = body;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updates: any = {};
@@ -53,13 +54,11 @@ export async function DELETE(
   try {
     await connectDB();
 
-    const { id } = await params;
-    const body = await req.json();
-    const { adminSecret } = body;
-
-    if (adminSecret !== process.env.ADMIN_SECRET) {
+    if (!(await isAdmin())) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
+
+    const { id } = await params;
 
     const deleted = await User.findByIdAndDelete(id);
 

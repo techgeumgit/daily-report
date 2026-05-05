@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongoose';
 import Report from '@/models/Report';
+import { isAdmin } from '@/lib/auth';
 
 // POST /api/admin/reports - admin create (no 48h restriction, any date)
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const body = await req.json();
-    const { date, name, todaysWork, meetingAttended, bottleneck, tomorrowPlan, adminSecret } = body;
-
-    // Verify admin secret
-    if (adminSecret !== process.env.ADMIN_SECRET) {
+    if (!(await isAdmin())) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
+
+    const body = await req.json();
+    const { date, name, todaysWork, meetingAttended, bottleneck, tomorrowPlan } = body;
 
     if (!name || !todaysWork || !tomorrowPlan) {
       return NextResponse.json(

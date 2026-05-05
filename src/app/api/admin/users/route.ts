@@ -1,18 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongoose';
 import User from '@/models/User';
+import { isAdmin } from '@/lib/auth';
 
 // POST /api/admin/users - admin creates a new user
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const body = await req.json();
-    const { name, adminSecret } = body;
-
-    if (adminSecret !== process.env.ADMIN_SECRET) {
+    if (!(await isAdmin())) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
+
+    const body = await req.json();
+    const { name } = body;
 
     if (!name?.trim()) {
       return NextResponse.json(
