@@ -162,6 +162,7 @@ export default function EditModal({ onSaved }: Props) {
               name="meetingAttended"
               value={form.meetingAttended}
               onChange={handleChange}
+              required
               className="w-full h-9 px-3 rounded-lg border border-[#e5e7eb] text-sm text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
             />
           </div>
@@ -173,6 +174,7 @@ export default function EditModal({ onSaved }: Props) {
               name="bottleneck"
               value={form.bottleneck}
               onChange={handleChange}
+              required
               className="w-full h-9 px-3 rounded-lg border border-[#e5e7eb] text-sm text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb]"
             />
           </div>

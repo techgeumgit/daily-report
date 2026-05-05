@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { date, name, todaysWork, meetingAttended, bottleneck, tomorrowPlan } = body;
 
-    if (!name || !todaysWork || !tomorrowPlan) {
+    if (!name || !todaysWork || !tomorrowPlan || !meetingAttended || !bottleneck) {
       return NextResponse.json(
-        { success: false, error: 'Name, today\'s work, and tomorrow\'s plan are required.' },
+        { success: false, error: 'All fields are required.' },
         { status: 400 }
       );
     }

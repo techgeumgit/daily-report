@@ -237,7 +237,7 @@ export default function SubmitPage() {
               <label className="flex items-center gap-1.5 text-xs font-medium text-[#374151] uppercase tracking-wide">
                 <Users className="w-3.5 h-3.5" />
                 {labels.meetingLabel}
-                <span className="ml-auto text-[#9ca3af] font-normal normal-case tracking-normal">Optional</span>
+                <span className="ml-auto text-[#2563eb] font-normal normal-case tracking-normal">Required</span>
               </label>
               <input
                 type="text"
@@ -246,6 +246,7 @@ export default function SubmitPage() {
                 value={form.meetingAttended}
                 onChange={handleChange}
                 placeholder={labels.meetingPlaceholder}
+                required
                 className="w-full h-10 px-3 rounded-lg border border-[#e5e7eb] bg-white text-[#111827] text-sm placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb] transition-all"
               />
             </div>
@@ -255,7 +256,7 @@ export default function SubmitPage() {
               <label className="flex items-center gap-1.5 text-xs font-medium text-[#374151] uppercase tracking-wide">
                 <AlertCircle className="w-3.5 h-3.5" />
                 {labels.bottleneckLabel}
-                <span className="ml-auto text-[#9ca3af] font-normal normal-case tracking-normal">Optional</span>
+                <span className="ml-auto text-[#2563eb] font-normal normal-case tracking-normal">Required</span>
               </label>
               <input
                 type="text"
@@ -264,6 +265,7 @@ export default function SubmitPage() {
                 value={form.bottleneck}
                 onChange={handleChange}
                 placeholder="Any blockers or challenges?"
+                required
                 className="w-full h-10 px-3 rounded-lg border border-[#e5e7eb] bg-white text-[#111827] text-sm placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20 focus:border-[#2563eb] transition-all"
               />
             </div>
